@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{25C07B25-8ED7-4BE6-9CCB-8D9A91002E4D}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\ProcureToPay.json = ..\..\ProcureToPay.json
+		..\..\ProcureToPay.sol = ..\..\ProcureToPay.sol
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
