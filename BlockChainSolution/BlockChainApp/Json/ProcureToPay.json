@@ -1,0 +1,281 @@
+{
+  "ApplicationName": "ProcureToPay",
+  "DisplayName": "ProcureToPay",
+  "Description": "...",  
+  "ApplicationRoles": [
+    {
+      "Name": "Supplier",
+      "Description": "..."
+    },
+    {
+      "Name": "Buyer",
+      "Description": "..."
+    },
+    {
+      "Name": "CustomOfficer",
+      "Description": "..."
+    },
+	{
+      "Name": "Transporter",
+      "Description": "..."
+    }
+  ],
+  "Workflows": [
+    {
+      "Name": "ProcureToPay",
+      "DisplayName": "ProcureToPay",
+      "Description": "...",
+      "Initiators": [ "Buyer" ],
+      "StartState":  "Created",
+      "Properties": [
+        {
+          "Name": "State",
+          "DisplayName": "State",
+          "Description": "Holds the state of the contract",
+          "Type": {
+            "Name": "state"
+          }
+        },
+        {
+          "Name": "Supplier",
+          "DisplayName": "Supplier",
+          "Description": "...",
+          "Type": {
+            "Name": "Supplier"
+          }
+        },
+        {
+          "Name": "Buyer",
+          "DisplayName": "Buyer",
+          "Description": "...",
+          "Type": {
+            "Name": "Buyer"
+          }
+        },
+        {
+          "Name": "PreviousCounterparty",
+          "DisplayName": "PreviousCounterparty",
+          "Description": "...",
+          "Type": {
+            "Name": "Buyer"
+          }
+        },
+        {
+            "Name": "ProductName",
+            "DisplayName": "ProductName",
+            "Description": "...",
+            "Type": {
+                "Name": "string"
+              }
+           
+      },
+      {
+        "Name": "OrderQuantity",
+        "DisplayName": "OrderQuantity",
+        "Description": "...",
+        "Type": {
+            "Name": "int"
+          }
+        },
+        {
+            "Name": "Price",
+            "DisplayName": "Price",
+            "Description": "...",
+            "Type": {
+                "Name": "int"
+              }
+           
+        },
+        {
+            "Name": "TargetedDeliveryDate",
+            "DisplayName": "TargetedDeliveryDate",
+            "Description": "...",
+            "Type": {
+                "Name": "string"
+              }
+           
+        }
+      ],
+      "Constructor": {
+		  "Parameters": [
+            {
+                "Name": "ProductName",
+                "DisplayName": "ProductName",
+                "Description": "...",
+                "Type": {
+                    "Name": "string"
+                  }
+               
+          },
+          {
+            "Name": "OrderQuantity",
+            "DisplayName": "OrderQuantity",
+            "Description": "...",
+            "Type": {
+                "Name": "int"
+              }
+          },
+          {
+            "Name": "Price",
+            "DisplayName": "Price",
+            "Description": "...",
+            "Type": {
+                    "Name": "int"
+              }               
+            },
+            {
+                "Name": "TargetedDeliveryDate",
+                "DisplayName": "TargetedDeliveryDate",
+                "Description": "...",
+                "Type": {
+                    "Name": "string"
+                  }
+               
+            }
+			]
+      },
+      "Functions": 
+      [
+        {
+          "Name": "CreatePurchaseOrder",
+          "DisplayName": "CreatePurchaseOrder",
+          "Description": "...",
+          "Parameters": [
+            {
+              "Name": "newCounterparty",
+              "Description": "...",
+              "DisplayName": "newCounterparty",
+              "Type": {
+                "Name": "Buyer"
+              }
+            }
+          ]
+        },
+        {
+            "Name": "GetPurchaseOrderDetails",
+            "DisplayName": "GetPurchaseOrderDetails",
+            "Description": "...",
+            "Parameters": [
+              {
+                "Name": "newCounterpartyAV",
+                "Description": "...",
+                "DisplayName": "newCounterpartyAV",
+                "Type": {
+                  "Name": "Buyer"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "ValidateGoodsReceived",
+            "DisplayName": "ValidateGoodsReceived",
+            "Description": "...",
+            "Parameters": [
+              {
+                "Name": "newCounterpartyValidate",
+                "Description": "...",
+                "DisplayName": "newCounterpartyValidate",
+                "Type": {
+                  "Name": "Buyer"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "ConfirmPurchaseOrder",
+            "DisplayName": "ConfirmPurchaseOrder",
+            "Description": "...",
+            "Parameters": [
+              {
+                "Name": "newCounterpartyConfirm",
+                "Description": "...",
+                "DisplayName": "newCounterpartyConfirm",
+                "Type": {
+                  "Name": "Supplier"
+                }
+              }
+            ]
+          }
+	  ],
+      "States": 
+      [
+		{
+          "Name": "Created",
+          "DisplayName": "Created",
+          "Description": "...",
+          "PercentComplete": 10,
+          "Value": 0,
+          "Style": "Success",
+          "Transitions": [
+			{
+              "AllowedRoles": [],
+              "AllowedInstanceRoles": ["Supplier"],
+              "Description": "...",
+              "Function": "CreatePurchaseOrder",
+              "NextStates": [ "CreatingContract" ],
+              "DisplayName": "CreatePurchaseOrder"
+            }
+		  ]
+		},
+		{
+          "Name": "CreatingContract",
+          "DisplayName": "CreatingContract",
+          "Description": "...",
+          "PercentComplete": 50,
+          "Value": 1,
+          "Style": "Success",
+          "Transitions": [
+			{
+              "AllowedRoles": [],
+              "AllowedInstanceRoles": ["Supplier"],
+              "Description": "...",
+              "Function": "ConfirmPurchaseOrder",
+              "NextStates": ["AcceptContract"],
+              "DisplayName": "ConfirmPurchaseOrder"
+            }
+		  ]
+        },
+        {
+            "Name": "AcceptContract",
+            "DisplayName": "AcceptContract",
+            "Description": "...",
+            "PercentComplete": 50,
+            "Value": 1,
+            "Style": "Success",
+            "Transitions": [
+              {
+                "AllowedRoles": [],
+                "AllowedInstanceRoles": ["Supplier" ],
+                "Description": "...",
+                "Function": "GetPurchaseOrderDetails",
+                "NextStates": ["ValidateGoods"],
+                "DisplayName": "GetPurchaseOrderDetails"
+              }
+            ]
+          },
+          {
+            "Name": "ValidateGoods",
+            "DisplayName": "ValidateGoods",
+            "Description": "...",
+            "PercentComplete": 50,
+            "Value": 1,
+            "Style": "Success",
+            "Transitions": [
+              {
+                "AllowedRoles": [],
+                "AllowedInstanceRoles": ["Buyer"],
+                "Description": "...",
+                "Function": "ValidateGoodsReceived",
+                "NextStates": ["ValidateGoods"],
+                "DisplayName": ""
+              }
+            ]
+          }   
+                        
+	  ]  
+	}
+   ]
+}
+  
+
+
